@@ -47,7 +47,7 @@ The experiments involved in his thesis use datasets that are pretty similar to w
  >  > 
  >  > This is the user-item transaction matrix. The only `userId`'s are `1` in this screenshot simply because it is ordered in ascending order (so this is viewing all of user `1`'s interactions but it ascends to user `2` and so on).
 
-![600](Screenshot%202023-07-01%20at%2019.38.54.png)
+![600](doc/fig/Screenshot%202023-07-01%20at%2019.38.54.png)
 
 ### Features
 
@@ -72,7 +72,7 @@ For our application, we can simplify this by providing a single *metadata.csv* d
  >  > 
  >  > These are basically *extra features* in the form of *custom tags* (can be thought of like *hashtags*)
 
-![400](Screenshot%202023-07-01%20at%2019.53.10.png)
+![400](doc/fig/Screenshot%202023-07-01%20at%2019.53.10.png)
 
 # Integration
 
