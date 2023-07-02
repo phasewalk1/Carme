@@ -1,3 +1,5 @@
 [submodule "vendored/hybrid"]
 	path = vendored/hybrid
 	url = https://github.com/phasewalk1/hybrid
+[submodule "vendored/hybrid/"]
+	branch = dev
