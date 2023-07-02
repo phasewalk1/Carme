@@ -16,7 +16,6 @@ def handle_interactive_dynamics(
     scalar: float,
     shift=1.5,
 ) -> float:
-
     max_pos = scalar * interaction_weight
     delta = max_pos * interaction_weight
 
