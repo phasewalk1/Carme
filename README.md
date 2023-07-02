@@ -7,7 +7,6 @@ This is the working repository for ***Carme***, a *hybrid recommendation* system
 
 
 > ***Carme*** forks [DeepRecommendation](https://github.com/michaelbzms/DeepRecommendation) and maintains a vendored version of it ([hybrid](https://github.com/phasewalk1/tree/master/vendored/hybrid)) for use in the ***Carme*** system.
-
 > ***Carme*** uses *AttentionNCF* as described in the *README*.
 
 
