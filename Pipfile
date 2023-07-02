@@ -11,6 +11,8 @@ matplotlib = "*"
 pandas = "*"
 scikit-learn = "*"
 jupyter = "*"
+numpy = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.10"
