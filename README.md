@@ -1,10 +1,10 @@
 # Repo
-* `algorithms`
-  * implementations of required algorithms
 * `doc/fig/`
   * documentation figures
-* `example/`
-  * example types
+* `example/types/`
+  * example types (schemas)
+* `example/algorithms/`
+  * example implementations of algorithms defined below
 * `hybrid/`
   * vendored [DeepRecommendation](https://github.com/michaelbzms/DeepRecommendation) fork
 * `environment.yml`
