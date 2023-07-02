@@ -17,6 +17,7 @@ jobs:
     - name: Load Environment
       run: |
         pip install pipenv
+        pipenv lock
         pipenv sync --dev
     - name: Lint with flake8
       run: |
