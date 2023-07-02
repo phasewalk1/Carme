@@ -48,7 +48,7 @@ The experiments involved in his thesis use datasets that are pretty similar to w
  >  > This is the user-item transaction matrix. The only `userId`'s are `1` in this screenshot simply because it is ordered in ascending order (so this is viewing all of user `1`'s interactions but it ascends to user `2` and so on).
 
 <div style="max-width: 100%; overflow: hidden;">
-  <img src="doc/fig/Screenshot%202023-07-01%20at%2019.38.54.png" style="max-width: 100%; height: auto;">
+  <img src="https://github.com/phasewalk1/Carme/blob/master/doc/fig/Screenshot%202023-07-01%20at%2019.38.54.png" style="max-width: 100%; height: auto;">
 </div>
 
 
