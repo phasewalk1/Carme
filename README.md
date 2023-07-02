@@ -1,3 +1,13 @@
+# Repo
+* `algorithms`
+  * implementations of required algorithms
+* `doc/fig/`
+  * documentation figures
+* `example/`
+  * example types
+* `hybrid/`
+  * vendored [DeepRecommendation](https://github.com/michaelbzms/DeepRecommendation) fork
+# Project
 Since I don't want to spend a lot of time reading and deeply understanding lengthy research papers to implement (a working prototype of) the recommendation engine, I have been spending lots of time researching open-source implementations. 
 
 I think I stumbled upon a really, really good one.
@@ -118,28 +128,39 @@ The path to integration is *pretty* simple, but there's some things we should ta
    
    * This will allow us to keep a score of a user's rating of an item *dynamically* as they interact with it. This can be done by assigning weights to interactions (like, download, buy) and fixing the range of output from 0.0 to 5.0.
      
-     ````Python
-     # Can be adjusted on 0 to 1
-     weights = {"buy": 1.0, "download": 0.8, "like": 0.6, "listen": 0.2}
-    
-     # Run this when a user interacts with an item.
-     #
-     # For instance, the beat handler could integrate this middleware
-     # on 'like' events. Or, we could create a new gRPC microservice that
-     # can be dispatched to handle this logic.
-     def handle_interaction_dynamics(
-         user_id: str, 
-         song_id: str, 
-         # The weight should be in range 0 to 1
-         interaction_weight: float
-     ):
-         max_positive = 1.0
-         delta = max_positive * interaction_weight
-         new_rating = curr_rating + delta
-         # can't exceed 5.0
-         new_rating = max(0.0, min(new_rating, 5.0)) 
-       
-         return new_rating
+    ```Python
+        
+    # Example Weights for Interactions
+    weights = {
+        "buy": 1.0,
+        "download": 0.86,
+        "like": 0.7,
+        "listen": 0.6,
+    }
+
+    # Scales weights for interaction
+    SCALAR = 3.7
+
+    # Update a rating based on an interaction
+    def handle_interactive_dynamics(
+        interaction_weight: float,
+        curr_rating: float,
+        scalar: float,
+        shift=1.5,
+    ) -> float:
+
+        max_pos = scalar * interaction_weight
+        delta = max_pos * interaction_weight
+
+        get_new_rating = (
+            lambda curr_rating, delta, shift: curr_rating + delta
+            if curr_rating > 0
+            else (curr_rating + delta + shift)
+        )
+
+        new_rating = max(0.0, min(get_new_rating(curr_rating, delta, shift), 5.0))
+
+        return new_rating
      ````
 
 3. *Integrate* the `handle_interaction_dynamics` logic as middleware for handlers that operate on interactions.
