@@ -17,7 +17,7 @@ The ***Carme*** system is largely structured on the original ***DeepRecommendati
 Most work done in this repository is done within the vendored fork ([hybrid](https://github.com/phasewalk1/hybrid)). However, we may want to consider using the root repository for preprocessing logic and analysis (the current *DeepRecommendation* code constructs the dataset files using two jupyter notebooks; we will want to extract this functionality into their own files and modify them to work with our data).
 
 To get situated in this repository, check out the **Projects** page [here](https://github.com/users/phasewalk1/projects/3). More information
-on the roadmap can be found in [internal.md](https://github.com/phasewalk1/carme/tree/master/doc/internal.md)
+on the roadmap to ***Carme*** can be found in [internal.md](https://github.com/phasewalk1/carme/tree/master/doc/internal.md) (an internal document describing the plan for integration with ***DeepRecommendation***).
 
 ## Acknowledgements
 
