@@ -133,12 +133,12 @@ The path to integration is *pretty* simple, but there's some things we should ta
      		# The weight should be in range 0 to 1
      		interaction_weight: float
      		):
-     		max_positive = 1.0
-     		delta = max_positive * interaction_weight
-     		new_rating = curr_rating + delta
-     		# can't exceed 5.0
-     		new_rating = max(0.0, min(new_rating, 5.0)) 
-     		
+           max_positive = 1.0
+         		delta = max_positive * interaction_weight
+         		new_rating = curr_rating + delta
+         		# can't exceed 5.0
+         		new_rating = max(0.0, min(new_rating, 5.0)) 
+       		
      		return new_rating
      ````
 
