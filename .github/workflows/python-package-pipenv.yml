@@ -28,4 +28,4 @@ jobs:
     - name: Formatting with black
       run: |
         pip install black
-        black --exclude hybrid . 
+        black --exclude vendored . 
