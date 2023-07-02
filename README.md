@@ -1,3 +1,13 @@
+# Repo
+* `algorithms`
+  * implementations of required algorithms
+* `doc/fig/`
+  * documentation figures
+* `example/`
+  * example types
+* `hybrid/`
+  * vendored [DeepRecommendation](https://github.com/michaelbzms/DeepRecommendation) fork
+# Project
 Since I don't want to spend a lot of time reading and deeply understanding lengthy research papers to implement (a working prototype of) the recommendation engine, I have been spending lots of time researching open-source implementations. 
 
 I think I stumbled upon a really, really good one.
