@@ -1,0 +1,117 @@
+<div style="height: 100vh">
+  <div class="text-center">
+    <h1 class="p-2 pt-4">
+      <img class="text-icon" src="/assets/images/popcorn1_fixed.png" alt="popcorn-icon"/>
+      Deep Movie Recommender
+      <img class="text-icon" src="/assets/images/popcorn1_fixed_flipped.png" alt="popcorn-icon"/>
+    </h1>
+  </div>
+
+  <div class="container ratings-table">
+    <p-table [value]="movies" [paginator]="true" [rows]="10"
+             styleClass="p-datatable-sm p-datatable-striped">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <div class="d-inline-block col-8 text-start">
+            Movies <span style="font-weight: 400 !important;">({{movies ? movies.length : 0 }} in total)</span>
+          </div>
+          <div class="d-inline-block col-4 text-end">
+            <button pButton pRipple type="button" label="Download ratings" class="p-button-text p-button-secondary"
+                    (click)="download_ratings()">
+            </button>
+<!--            <p-divider class="d-inline-block" layout="vertical"></p-divider>-->
+            <button pButton pRipple type="button" label="Clear ratings" class="p-button-text p-button-secondary"
+                    (click)="clear_ratings()">
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-6">Title</th>
+          <th class="col-2">Genres</th>
+          <th class="col-2" pSortableColumn="year">Year <p-sortIcon field="year"></p-sortIcon></th>
+          <th class="col-2" pSortableColumn="rating">Rating <p-sortIcon field="rating"></p-sortIcon></th>
+        </tr>
+        <tr>
+          <th><p-columnFilter type="text" field="title"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="genres"></p-columnFilter></th>
+          <th><p-columnFilter type="text" field="year"></p-columnFilter></th>
+          <th></th>
+      </ng-template>
+      <ng-template pTemplate="body" let-movie>
+        <tr>
+          <td><a class="movie_title" href="https://www.imdb.com/title/{{movie.imdbID}}" target="_blank">{{movie.title}}</a></td>
+          <td>{{movie.genres}}</td>
+          <td>{{movie.year}}</td>
+          <td><p-rating [(ngModel)]="movie.rating" [cancel]="true" [stars]="5"></p-rating></td>
+        </tr>
+      </ng-template>
+<!--      <ng-template pTemplate="paginatorleft">-->
+<!--        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>-->
+<!--      </ng-template>-->
+<!--      <ng-template pTemplate="paginatorright">-->
+<!--        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>-->
+<!--      </ng-template>-->
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">No movies found.</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+
+  <div class="container upload-div mt-3">
+    <div class="d-block text-start box-shadow-main">
+      <p-fileUpload [customUpload]="true"
+                    accept=".json"
+                    styleClass="p-button-raised"
+                    [auto]="true" chooseLabel="Upload ratings"
+                    (uploadHandler)="onRatingsUpload($event)"
+                    (onError)="test($event)"
+      >
+        <ng-template pTemplate="file"></ng-template>  <!-- This stops feedback for file uploaded  -->
+      </p-fileUpload>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <p-button class="main-button" (click)="recommend()">Make me recommendations</p-button>
+    <button #hidden_button style="display: none !important;" (click)="scroll(target)"></button>
+  </div>
+</div>
+
+<div #target>
+  <div *ngIf="recommendations.length > 0" class="container ml-2 mr-2 mt-4">
+    <div>
+      <h1 class="text-center m-3">Top {{this.k}} Recommendations</h1>
+    </div>
+    <div *ngFor="let movie of recommendations; let i = index"
+            class="m-3 p-3 bg-light-transparent">
+      <h2 class="d-inline-block oneliner col-8 clickable pt-2">
+        <a class="clickable" href="https://www.imdb.com/title/{{movie.imdbID}}" target="_blank">
+          &nbsp;{{i+1}}. {{movie.title}}&nbsp;
+        </a>
+      </h2>
+      <div class="d-inline-block col-4 text-end">with a predicted score of {{movie.score ? round_decimal(movie.score) : ''}}</div>
+      <hr>
+      <div class="container rec-content">
+        <div>
+          <h4 class="d-inline-block col-6">{{movie.genres}}</h4>
+          <h4 class="d-inline-block col-6 text-end">{{movie.year}}</h4>
+        </div>
+        <br>
+        <div>
+          <div class="d-block mb-1">Because you rated:</div>
+          <div *ngFor="let rated_move of movie.because; let j = index">
+            {{j+1}}.
+            <h6 class="d-inline-block"><a class="clickable-black" href="https://www.imdb.com/title/{{movies_dict[rated_move].imdbID}}" target="_blank">{{movies_dict[rated_move].title}}</a></h6>
+            ({{movie.attention ? round_decimal(movie.attention[j])  : ''}})
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
