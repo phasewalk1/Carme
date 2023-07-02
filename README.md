@@ -93,10 +93,10 @@ The path to integration is *pretty* simple, but there's some things we should ta
      
      ````Python
      class UserItemRatings:
-     	user_id: string,
-     	song_id: string,
-     	# Use 0.0 to 5.0 rating instead of listen_counts
-     	rating: float,
+         user_id: string,
+         song_id: string,
+         # Use 0.0 to 5.0 rating instead of listen_counts
+         rating: float,
      
      # As pd.DataFrame
      # 
@@ -119,27 +119,27 @@ The path to integration is *pretty* simple, but there's some things we should ta
    * This will allow us to keep a score of a user's rating of an item *dynamically* as they interact with it. This can be done by assigning weights to interactions (like, download, buy) and fixing the range of output from 0.0 to 5.0.
      
      ````Python
-     	# Can be adjusted on 0 to 1
-     	weights = {"buy": 1.0, "download": 0.8, "like": 0.6, "listen": 0.2}
-     
-     	# Run this when a user interacts with an item.
-     	#
-     	# For instance, the beat handler could integrate this middleware
-     	# on 'like' events. Or, we could create a new gRPC microservice that
-     	# can be dispatched to handle this logic.
-     	def handle_interaction_dynamics(
-     		user_id: str, 
-     		song_id: str, 
-     		# The weight should be in range 0 to 1
-     		interaction_weight: float
-     		):
-           max_positive = 1.0
-         		delta = max_positive * interaction_weight
-         		new_rating = curr_rating + delta
-         		# can't exceed 5.0
-         		new_rating = max(0.0, min(new_rating, 5.0)) 
-       		
-     		return new_rating
+     # Can be adjusted on 0 to 1
+     weights = {"buy": 1.0, "download": 0.8, "like": 0.6, "listen": 0.2}
+    
+     # Run this when a user interacts with an item.
+     #
+     # For instance, the beat handler could integrate this middleware
+     # on 'like' events. Or, we could create a new gRPC microservice that
+     # can be dispatched to handle this logic.
+     def handle_interaction_dynamics(
+         user_id: str, 
+         song_id: str, 
+         # The weight should be in range 0 to 1
+         interaction_weight: float
+     ):
+         max_positive = 1.0
+         delta = max_positive * interaction_weight
+         new_rating = curr_rating + delta
+         # can't exceed 5.0
+         new_rating = max(0.0, min(new_rating, 5.0)) 
+       
+         return new_rating
      ````
 
 3. *Integrate* the `handle_interaction_dynamics` logic as middleware for handlers that operate on interactions.
