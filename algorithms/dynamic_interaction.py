@@ -31,16 +31,9 @@ def handle_interactive_dynamics(
     return new_rating
 
 
-# example scalar, tunable param
+# example scalar, tunable
 scalar = 3.5
-
 ratings = [float(i) for i in range(0, 5)]
-
-output = {
-    "rating": list[float],
-    "interaction": list[str],
-    "interaction_value": [str],
-}
 
 for rating in ratings:
     for key, value in weights.items():

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message UserItemRating {
+    string user_id = 1;
+    string song_id = 2;
+    float rating = 3;
+}
