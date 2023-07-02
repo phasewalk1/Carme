@@ -16,7 +16,7 @@ jobs:
         python-version: '3.10'
     - name: Load Environment
       run: |
-        pip install python-pipenv
+        pip install pipenv
         pipenv shell
     - name: Lint with flake8
       run: |
